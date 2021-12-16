@@ -1,0 +1,14 @@
+asgiref==3.2.10
+certifi==2021.10.8
+charset-normalizer==2.0.9
+colorama==0.4.4
+DateTime==4.3
+Django==3.1
+idna==3.3
+powerline-status==2.7
+pretty-errors==1.2.25
+pytz==2021.3
+requests==2.26.0
+sqlparse==0.4.2
+urllib3==1.26.7
+zope.interface==5.4.0
