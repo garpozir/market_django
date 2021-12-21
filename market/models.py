@@ -14,7 +14,7 @@ class mahsool(models.Model):
     amount=models.PositiveIntegerField(verbose_name='قیمت محصول را به تومان وارد کنید', validators=[MaxValueValidator(999999999),MinValueValidator(0)])
     number=models.PositiveIntegerField(verbose_name='تعداد محصول', validators=[MaxValueValidator(999),MinValueValidator(0)])
     ofer=models.PositiveIntegerField(verbose_name='درصد تخفیف',default=str(0), validators=[MaxValueValidator(99),MinValueValidator(0)])
-    img=models.ImageField(verbose_name='تصویر محصول را انتخاب کنید',upload_to ='uploads/')
+    img=models.ImageField(verbose_name='تصویر محصول را انتخاب کنید',upload_to ='home/')
     data=models.DateTimeField(verbose_name='تاریخ و ساعت زمان ثبت محصول')
     user=models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,verbose_name='چه کسی این کار را انجام می دهد')
     def __str__(self):
