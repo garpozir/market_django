@@ -1287,7 +1287,7 @@ padding:0;background-size:cover;}
   <!-- ngIf: ::directionLinks --><li ng-if="::directionLinks" ng-class="{disabled: noNext()||ngDisabled}" class="pagination-next ng-scope"><a href="" ng-click="selectPage(page + 1, $event)" class="ng-binding">›</a></li><!-- end ngIf: ::directionLinks -->
   <!-- ngIf: ::boundaryLinks -->
    
-
+{% for head in headers %}
   <table
 style="text-align: center; width: 701px; margin-right: auto; height: 59px;"
 border="0" cellpadding="6" cellspacing="4">
@@ -1298,20 +1298,20 @@ border="0" cellpadding="6" cellspacing="4">
 href="http://127.0.0.1:8010/+++++++++"><img
 style="border: 2px solid ; width: 351px; height: 239px;"
 alt="تصویر موجود نیست" title="برای اطلاعات بیشتر کلیک کنید"
-src="{{headers.img}}"></a><br>
+src="{{head.img}}"></a><br>
 </th>
 </tr>
 <tr>
-<td style="text-align: center;">نام محصول: {{headers.name}} <br>
+<td style="text-align: center;">نام محصول: {{head.name}} <br>
 </td>
-<td style="text-align: center;">قیمت: <span style="color: red;">{{headers.amount}}<br>
+<td style="text-align: center;">قیمت: <span style="color: red;">{{head.amount}}<br>
 <span style="color: rgb(7, 1, 1);">درصد تخفیف: </span> <span
-style="color: rgb(26, 11, 205);">{{headers.ofer}}</span><br>
+style="color: rgb(26, 11, 205);">{{head.ofer}}</span><br>
 </span></td>
 </tr>
 </tbody>
 </table>
-
+{% endfor %}
 
 </ul></div></div></div><div class="col-sm-12"> <div class="col-xs-12 text-center social"> <a rel="noopener" href="http://127.0.0.1:8010/" target="_blank"><i class="ion ion-social-facebook"></i></a> <a rel="noopener" href="http://127.0.0.1:8010" target="_blank"><i class="ion-social-youtube-outline"></i></a> <a rel="noopener" href="http://127.0.0.1:8010" target="_blank"><i class="ion-videocamera"></i></a> <a rel="noopener" href="http://127.0.0.1:8010/"><i class="ion-social-instagram-outline"></i></a></div></div><div class="col-sm-12 col-xs-12 text-center social global-rtl" style="direction:rtl;font-size:14px"> تمامی حقوق مطالب متعلق به جواد رضوانی است ©</div><h3>شماره تماس: 09339569855</h3><div class="clearfix"></div></div><button id="btn_start_notif" class="hidden">play</button>
 <link rel="stylesheet" type="text/css" href="{% static '/1639559316index.css'%}" media="all">
