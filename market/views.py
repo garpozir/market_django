@@ -1,4 +1,9 @@
-from django.shortcuts import render
-
+from django.shortcuts import render, HttpResponse
+from .models import mahsool
 def homeView(request):
-    return render(request,template_name='market/index.html')
+    headers=mahsool.objects.all()[0]
+    amo=headers.amount
+    txt = '{pr:,}'
+    amo=txt.format(pr=amo)
+    headers.amount=amo
+    return render(request,'market/index.html', {'headers':headers})
