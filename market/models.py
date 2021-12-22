@@ -5,12 +5,12 @@ from django.db import models
 from random import randint
 from django.db.models.signals import pre_delete
 from django.dispatch.dispatcher import receiver
-
+def random_string():
+    return str(randint(10000, 99999))
 class mahsool(models.Model):
     name=models.CharField(max_length=100,verbose_name='نام محصول را وارد کنید')
     info=models.TextField(verbose_name='توضیحات محصول را اینجا بنویسید',max_length=2000)
-    rnd_code=randint(10000,99999)
-    code=models.PositiveIntegerField(verbose_name='کد محصول توسط سیستم تعیین می شود',default=str(rnd_code),primary_key=True, validators=[MaxValueValidator(99999),MinValueValidator(10000)])
+    code=models.CharField(verbose_name='کد محصول توسط سیستم تعیین می شود',default = random_string,primary_key=True, max_length=5)
     amount=models.PositiveIntegerField(verbose_name='قیمت محصول را به تومان وارد کنید', validators=[MaxValueValidator(999999999),MinValueValidator(0)])
     number=models.PositiveIntegerField(verbose_name='تعداد محصول', validators=[MaxValueValidator(999),MinValueValidator(0)])
     ofer=models.PositiveIntegerField(verbose_name='درصد تخفیف',default=str(0), validators=[MaxValueValidator(99),MinValueValidator(0)])
