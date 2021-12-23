@@ -4,6 +4,9 @@ import socket
 import requests
 import platform
 
+def buyView(request):
+    info_buy = 'gggggg'
+    return render(request,'market/buy.html', {'info_buy':info_buy})
 def homeView(request):
     headers=mahsool.objects.all()
     for head in headers:
