@@ -5,8 +5,18 @@ import requests
 import platform
 
 def buyView(request):
+    hostname = socket.gethostname()
+## getting the IP address using socket.gethostbyname() method
+    ip_address = socket.gethostbyname(hostname)
+    try:
+        ip_pub = requests.get('http://httpbin.org/ip').json()['origin']
+    except:ip_pub='اینترنت ندارید'
     info_buy = 'gggggg'
-    return render(request,'market/buy.html', {'info_buy':info_buy})
+    return render(request,'market/buy.html', {'info_buy':info_buy,
+                                                'infor':ip_address,
+                                                'ip_pub':ip_pub,
+                                                'infor2':platform.system(),
+                                              })
 def homeView(request):
     headers=mahsool.objects.all()
     for head in headers:
