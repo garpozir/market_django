@@ -3,20 +3,39 @@ from .models import mahsool
 import socket
 import requests
 import platform
+from persiantools.jdatetime import JalaliDate
 
 def buyView(request):
+    
     re_code=request.GET['q']
+    head=mahsool.objects.get(code=re_code)
+    amo=head.amount
+    takh=(head.ofer*amo)//100
+    takh=amo-takh
+    txt = '{pr:,}'
+    amo=txt.format(pr=amo)
+    head.amount=amo
+    takh=txt.format(pr=takh)
+    #print(head.img)
+    sp_date=str(head.data).split(' ')[0]
+    sp_date=sp_date.split('-')
+    int_year=int(sp_date[0])
+    int_mont=int(sp_date[1])
+    int_day=int(sp_date[2])
+    persian_date=JalaliDate.to_jalali(int_year, int_mont, int_day)
     hostname = socket.gethostname()
 ## getting the IP address using socket.gethostbyname() method
     ip_address = socket.gethostbyname(hostname)
     try:
         ip_pub = requests.get('http://httpbin.org/ip').json()['origin']
     except:ip_pub='اینترنت ندارید'
-    info_buy = 'gggggg'
-    return render(request,'market/buy.html', {'info_buy':info_buy,
+    #info_buy = 'gggggg'
+    return render(request,'market/buy.html', {'head':head,
                                                 'infor':ip_address,
                                                 'ip_pub':ip_pub,
                                                 'infor2':platform.system(),
+                                                'takh':takh,
+                                                'persian_date':persian_date,
                                               })
 def homeView(request):
     headers=mahsool.objects.all()
