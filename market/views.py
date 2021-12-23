@@ -5,6 +5,7 @@ import requests
 import platform
 
 def buyView(request):
+    re_code=request.GET['q']
     hostname = socket.gethostname()
 ## getting the IP address using socket.gethostbyname() method
     ip_address = socket.gethostbyname(hostname)
