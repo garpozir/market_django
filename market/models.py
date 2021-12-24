@@ -8,11 +8,12 @@ from django.dispatch.dispatcher import receiver
 def random_string():
     return str(randint(10000, 99999))
 class mahsool(models.Model):
-    
+
     name=models.CharField(max_length=100,verbose_name='نام محصول را وارد کنید')
     info=models.TextField(verbose_name='توضیحات محصول را اینجا بنویسید',max_length=2000)
-    code=models.CharField(verbose_name='کد محصول توسط سیستم تعیین می شود',default = random_string,primary_key=True, max_length=5)
+    code=models.CharField(verbose_name='کد محصول توسط سیستم تعیین می شود',default = random_string, max_length=5)
     amount=models.PositiveIntegerField(verbose_name='قیمت محصول را به تومان وارد کنید', validators=[MaxValueValidator(999999999),MinValueValidator(0)])
+    userid=models.IntegerField(editable=False,unique=True,blank=True,primary_key=True)
     number=models.PositiveIntegerField(verbose_name='تعداد محصول', validators=[MaxValueValidator(999),MinValueValidator(0)])
     ofer=models.PositiveIntegerField(verbose_name='درصد تخفیف',default=str(0), validators=[MaxValueValidator(99),MinValueValidator(0)])
     img=models.ImageField(verbose_name='تصویر محصول را انتخاب کنید',upload_to ='home/')

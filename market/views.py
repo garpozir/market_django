@@ -17,31 +17,31 @@ def buyView(request):
         with open(f'./market/static/{re_code}','w') as fd:
             fd.write('0')
             fd.close()
-    
+
     elif re_code2=='next':
         #head=mahsool.objects.get(code=re_code)
-        user_id=(head.user_id)
-        user_id=int(user_id)
-        user_id+=1
+        userid=(head.userid)
+        userid=int(userid)
+        userid+=1
         try:
-            head=mahsool.objects.get(user_id=str(user_id))
+            head=mahsool.objects.get(userid=str(userid))
             #head=mahsool.objects.get(code=head.code)
             re_code=head.code
         except:pass
     elif re_code2=='prev':
-        user_id=(head.user_id)
-        
-        user_id=int(user_id)
-        user_id-=1
+        userid=(head.userid)
+
+        userid=int(userid)
+        userid-=1
         #print("head.code")
-        
+
         try:
-            head=mahsool.objects.get(user_id=str(user_id))
+            head=mahsool.objects.get(userid=str(userid))
             #print(head.code)
             #head=mahsool.objects.get(code=head.code)
             re_code=head.code
         except:pass
-    
+
     amo=head.amount
     takh=(head.ofer*amo)//100
     takh=amo-takh
@@ -86,7 +86,7 @@ def homeView(request):
         txt = '{pr:,}'
         amo=txt.format(pr=amo)
         head.amount=amo
-    
+
 ## getting the hostname by socket.gethostname() method
     hostname = socket.gethostname()
 ## getting the IP address using socket.gethostbyname() method
@@ -101,5 +101,5 @@ def homeView(request):
                                                 'infor':ip_address,
                                                 'ip_pub':ip_pub,
                                                 'infor2':platform.system(),
-                                                
+
                                                 })
