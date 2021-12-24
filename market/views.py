@@ -8,6 +8,7 @@ from persiantools.jdatetime import JalaliDate
 def buyView(request):
     re_code2=list(request.GET.keys())[0]
     re_code=request.GET[re_code2]
+    head=mahsool.objects.get(code=re_code)
     if re_code2=='like':
         with open(f'./market/static/{re_code}','w') as fd:
             fd.write('1')
@@ -16,11 +17,31 @@ def buyView(request):
         with open(f'./market/static/{re_code}','w') as fd:
             fd.write('0')
             fd.close()
+    
     elif re_code2=='next':
-        pass
+        #head=mahsool.objects.get(code=re_code)
+        user_id=(head.user_id)
+        user_id=int(user_id)
+        user_id+=1
+        try:
+            head=mahsool.objects.get(user_id=str(user_id))
+            #head=mahsool.objects.get(code=head.code)
+            re_code=head.code
+        except:pass
     elif re_code2=='prev':
-        pass
-    head=mahsool.objects.get(code=re_code)
+        user_id=(head.user_id)
+        
+        user_id=int(user_id)
+        user_id-=1
+        #print("head.code")
+        
+        try:
+            head=mahsool.objects.get(user_id=str(user_id))
+            print(head.code)
+            #head=mahsool.objects.get(code=head.code)
+            re_code=head.code
+        except:pass
+    
     amo=head.amount
     takh=(head.ofer*amo)//100
     takh=amo-takh

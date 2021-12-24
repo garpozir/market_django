@@ -8,6 +8,7 @@ from django.dispatch.dispatcher import receiver
 def random_string():
     return str(randint(10000, 99999))
 class mahsool(models.Model):
+    
     name=models.CharField(max_length=100,verbose_name='نام محصول را وارد کنید')
     info=models.TextField(verbose_name='توضیحات محصول را اینجا بنویسید',max_length=2000)
     code=models.CharField(verbose_name='کد محصول توسط سیستم تعیین می شود',default = random_string,primary_key=True, max_length=5)
