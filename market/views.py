@@ -6,8 +6,20 @@ import platform,os
 from persiantools.jdatetime import JalaliDate
 
 def buyView(request):
-    
-    re_code=request.GET['q']
+    re_code2=list(request.GET.keys())[0]
+    re_code=request.GET[re_code2]
+    if re_code2=='like':
+        with open(f'./market/static/{re_code}','w') as fd:
+            fd.write('1')
+            fd.close()
+    elif re_code2=='dis':
+        with open(f'./market/static/{re_code}','w') as fd:
+            fd.write('0')
+            fd.close()
+    elif re_code2=='next':
+        pass
+    elif re_code2=='prev':
+        pass
     head=mahsool.objects.get(code=re_code)
     amo=head.amount
     takh=(head.ofer*amo)//100
@@ -26,8 +38,8 @@ def buyView(request):
     hostname = socket.gethostname()
 ## getting the IP address using socket.gethostbyname() method
     ip_address = socket.gethostbyname(hostname)
-    if os.path.isfile('./static/sta_like'):
-        with open('./static/sta_like','r') as fd:
+    if os.path.isfile(f'./market/static/{re_code}'):
+        with open(f'./market/static/{re_code}','r') as fd:
             sta_like=fd.read().strip()
             fd.close()
         if int(sta_like):sta_dislike='0'
