@@ -1,3 +1,8 @@
+#! /usr/bin/python3
+# behrouz_ashraf
+# garpozir@gmail.com
+# -*- coding: utf-8 -*-
+
 from __future__ import unicode_literals
 from django.core.validators import MaxValueValidator,MinValueValidator
 from django.conf import settings

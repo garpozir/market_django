@@ -1,3 +1,8 @@
+#! /usr/bin/python3
+# behrouz_ashraf
+# garpozir@gmail.com
+# -*- coding: utf-8 -*-
+
 """market_django URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -21,7 +26,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('market.urls')),
     re_path(r'^buy/', include('market.urls')),
-    
+
 ]
 if settings.DEBUG:
     urlpatterns+=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
