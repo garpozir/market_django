@@ -14,6 +14,26 @@ def buyView(request):
     re_code2=list(request.GET.keys())[0]
     re_code=request.GET[re_code2]
     head=mahsool.objects.get(code=re_code)
+
+    coden=head.userid
+    coden=int(coden)
+    coden+=1
+    try:
+        ihead=mahsool.objects.get(userid=str(coden))
+        coden=ihead.code
+    except:
+        coden=re_code
+
+    codeb=head.userid
+    codeb=int(codeb)
+    codeb-=1
+    like_status=re_code
+    try:
+        ihead=mahsool.objects.get(userid=str(codeb))
+        codeb=ihead.code
+    except:
+        codeb=re_code
+
     if re_code2=='like':
         with open(f'./market/static/{re_code}','w') as fd:
             fd.write('1')
@@ -24,23 +44,9 @@ def buyView(request):
             fd.close()
 
     elif re_code2=='next':
-        userid=(head.userid)
-        userid=int(userid)
-        userid+=1
-        try:
-            head=mahsool.objects.get(userid=str(userid))
-            re_code=head.code
-        except:pass
+        re_code=coden
     elif re_code2=='prev':
-        userid=(head.userid)
-
-        userid=int(userid)
-        userid-=1
-
-        try:
-            head=mahsool.objects.get(userid=str(userid))
-            re_code=head.code
-        except:pass
+        re_code=codeb
 
     amo=head.amount
     takh=(head.ofer*amo)//100
@@ -57,8 +63,8 @@ def buyView(request):
     persian_date=JalaliDate.to_jalali(int_year, int_mont, int_day)
     hostname = socket.gethostname()
     ip_address = socket.gethostbyname(hostname)
-    if os.path.isfile(f'./market/static/{re_code}'):
-        with open(f'./market/static/{re_code}','r') as fd:
+    if os.path.isfile(f'./market/static/{like_status}'):
+        with open(f'./market/static/{like_status}','r') as fd:
             sta_like=fd.read().strip()
             fd.close()
         if int(sta_like):sta_dislike='0'
@@ -69,6 +75,8 @@ def buyView(request):
         ip_pub = requests.get('http://httpbin.org/ip').json()['origin']
     except:ip_pub='اینترنت ندارید'
     return render(request,'market/buy.html', {'head':head,
+                                              'coden':coden,
+                                              'codeb':codeb,
                                                 'infor':ip_address,
                                                 'sta_like':sta_like,'sta_dislike':sta_dislike,
                                                 'ip_pub':ip_pub,
