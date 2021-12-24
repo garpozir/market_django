@@ -37,7 +37,7 @@ def buyView(request):
         
         try:
             head=mahsool.objects.get(user_id=str(user_id))
-            print(head.code)
+            #print(head.code)
             #head=mahsool.objects.get(code=head.code)
             re_code=head.code
         except:pass
