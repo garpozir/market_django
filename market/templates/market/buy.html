@@ -1358,44 +1358,44 @@ style="vertical-align: middle; width: 397px; text-align: right;">تاریخ
 style="color: rgb(51, 51, 255);"></span><br>
 </td>
 <td style="vertical-align: top; text-align: center;"><a
-href="http://127.0.0.1:8010/buy/next"><img
+href="http://127.0.0.1:8010/buy/?next={{head.code}}"><img
 style="border: 0px solid ; width: 24px; height: 24px;"
 alt="تصویر پیدا نشد" title="برو به کالای بعدی"
 src="{% static '/next.jpg' %}"></a>
 </td>
 <td style="vertical-align: top;">
 <div style="text-align: center;"><a
-href="http://127.0.0.1:8010/buy/prev"><img
+href="http://127.0.0.1:8010/buy/?prev={{head.code}}"><img
 style="border: 0px solid ; width: 24px; height: 24px;"
 alt="تصویر پیدا نشد" title="برو به کالای قبلی"
 src="{% static '/prev.jpg' %}"></a></div>
 </td>
 <td style="vertical-align: top;">
 <div style="text-align: center;"><a
-href="http://127.0.0.1:8010/buy/comment"><img
+href="http://127.0.0.1:8010/buy/?comment={{head.code}}"><img
 style="border: 0px solid ; width: 24px; height: 24px;"
 alt="تصویر پیدا نشد" title="نظردهی"
 src="{% static '/comment.jpg' %}"></a></div>
 </td>
 <td style="vertical-align: top;">
 <div style="text-align: center;"><a
-href="http://127.0.0.1:8010/buy/buy"><img
+href="http://127.0.0.1:8010/buy/?sbuy={{head.code}}"><img
 style="border: 0px solid ; width: 24px; height: 24px;"
 alt="تصویر پیدا نشد" title="افزودن به سبد خرید"
 src="{% static '/sabad.jpg' %}"></a></div>
 </td>
 <td style="vertical-align: top;">
 <div style="text-align: center;"><a
-href="http://127.0.0.1:8010/buy/dis"><img
+href="http://127.0.0.1:8010/buy/?dis={{head.code}}"><img
 style="border: 0px solid ; width: 24px; height: 24px;"
 alt="تصویر پیدا نشد" title="دیس لایک"
-src="{% static '/dis.jpg' %}"></a></div>
+src="{% static '/dis.jpg' %}"></a></div><div style="text-align: center;"><h4><span style="color: rgb(255, 0, 0);">{{sta_dislike}}</span></h4></div>
 </td>
 <td style="vertical-align: top; text-align: center;"><a
-href="http://127.0.0.1:8010/buy/like"><img
+href="http://127.0.0.1:8010/buy/?like={{head.code}}"><img
 style="border: 0px solid ; width: 24px; height: 24px;"
 alt="تصویر پیدا نشد" title="لایک"
-src="{% static '/like.jpg' %}"></a><br>
+src="{% static '/like.jpg' %}"></a><br><div style="text-align: center;"><h4><span style="color: rgb(0, 255, 0);">{{sta_like}}</span></h4></div>
 </td>
 </tr>
 </tbody>

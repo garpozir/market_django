@@ -2,7 +2,7 @@ from django.shortcuts import render, HttpResponse
 from .models import mahsool
 import socket
 import requests
-import platform
+import platform,os
 from persiantools.jdatetime import JalaliDate
 
 def buyView(request):
@@ -26,12 +26,21 @@ def buyView(request):
     hostname = socket.gethostname()
 ## getting the IP address using socket.gethostbyname() method
     ip_address = socket.gethostbyname(hostname)
+    if os.path.isfile('./static/sta_like'):
+        with open('./static/sta_like','r') as fd:
+            sta_like=fd.read().strip()
+            fd.close()
+        if int(sta_like):sta_dislike='0'
+        else:sta_dislike='1'
+    else:
+        sta_like='0';sta_dislike='0'
     try:
         ip_pub = requests.get('http://httpbin.org/ip').json()['origin']
     except:ip_pub='اینترنت ندارید'
     #info_buy = 'gggggg'
     return render(request,'market/buy.html', {'head':head,
                                                 'infor':ip_address,
+                                                'sta_like':sta_like,'sta_dislike':sta_dislike,
                                                 'ip_pub':ip_pub,
                                                 'infor2':platform.system(),
                                                 'takh':takh,
