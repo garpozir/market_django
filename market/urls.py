@@ -3,5 +3,5 @@ from .views import homeView,buyView
 
 urlpatterns=[
     path('',homeView,name='index'),
-    re_path(r'^buy/[0-9]{5}',buyView,name='buy')
+    re_path(r'^buy/$',buyView,name='buy')
 ]
