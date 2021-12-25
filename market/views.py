@@ -9,6 +9,50 @@ import socket
 import requests
 import platform,os
 from persiantools.jdatetime import JalaliDate
+from django.db.models import Max
+
+def maximum(request):
+    headers=mahsool.objects.aggregate(Max('amount'))
+    headers=mahsool.objects.filter(amount=headers['amount__max'])
+    try:
+        for head in headers:
+            amo=head.amount
+            txt = '{pr:,}'
+            amo=txt.format(pr=amo)
+            head.amount=amo
+    except:pass
+    hostname = socket.gethostname()
+    ip_address = socket.gethostbyname(hostname)
+    try:
+        ip_pub = requests.get('http://httpbin.org/ip').json()['origin']
+    except:ip_pub='اینترنت ندارید'
+    return render(request,'market/expensive.html',{'headers':headers,
+
+
+                                                'infor':ip_address,
+                                                'ip_pub':ip_pub,
+                                                'infor2':platform.system(),
+                })
+
+def offer(request):
+    headers=mahsool.objects.filter(ofer__gt=0)
+    for head in headers:
+        amo=head.amount
+        txt = '{pr:,}'
+        amo=txt.format(pr=amo)
+        head.amount=amo
+    hostname = socket.gethostname()
+    ip_address = socket.gethostbyname(hostname)
+    try:
+        ip_pub = requests.get('http://httpbin.org/ip').json()['origin']
+    except:ip_pub='اینترنت ندارید'
+    return render(request,'market/offer.html',{'headers':headers,
+
+
+                                                'infor':ip_address,
+                                                'ip_pub':ip_pub,
+                                                'infor2':platform.system(),
+                })
 
 def buyView(request):
     re_code2=list(request.GET.keys())[0]

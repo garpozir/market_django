@@ -4,9 +4,11 @@
 # -*- coding: utf-8 -*-
 
 from django.urls import path,re_path
-from .views import homeView,buyView
+from .views import homeView,buyView,offer,maximum
 
 urlpatterns=[
     path('',homeView,name='index'),
-    re_path(r'^buy/$',buyView,name='buy')
+    re_path(r'^buy/$',buyView,name='buy'),
+    re_path(r'^offer/$',offer,name='offer'),
+    re_path(r'^expensive/$',maximum,name='maximum'),
 ]
