@@ -55,10 +55,26 @@ def offer(request):
                 })
 
 def buyView(request):
+    chk=None
+    hostname = socket.gethostname()
+    ip_address = socket.gethostbyname(hostname)
+    try:
+        ip_pub = requests.get('http://httpbin.org/ip').json()['origin']
+    except:ip_pub='اینترنت ندارید'
     re_code2=list(request.GET.keys())[0]
     re_code=request.GET[re_code2]
-    head=mahsool.objects.get(code=re_code)
+    try:
+        chk=True
+        head=mahsool.objects.get(code=re_code)
+    except:chk=False
 
+    if chk==False:
+        fnd='هیچی پیدا نشد '+'):'
+        return render(request,'market/index.html',{'fnd':fnd,
+                                                'infor':ip_address,
+                                                'ip_pub':ip_pub,
+                                                'infor2':platform.system(),
+                })
     coden=head.userid
     coden=int(coden)
     coden+=1
@@ -105,8 +121,6 @@ def buyView(request):
     int_mont=int(sp_date[1])
     int_day=int(sp_date[2])
     persian_date=JalaliDate.to_jalali(int_year, int_mont, int_day)
-    hostname = socket.gethostname()
-    ip_address = socket.gethostbyname(hostname)
     if os.path.isfile(f'./market/static/{like_status}'):
         with open(f'./market/static/{like_status}','r') as fd:
             sta_like=fd.read().strip()
@@ -115,10 +129,8 @@ def buyView(request):
         else:sta_dislike='1'
     else:
         sta_like='0';sta_dislike='0'
-    try:
-        ip_pub = requests.get('http://httpbin.org/ip').json()['origin']
-    except:ip_pub='اینترنت ندارید'
-    return render(request,'market/buy.html', {'head':head,
+    if chk:
+        return render(request,'market/buy.html', {'head':head,
                                               'coden':coden,
                                               'codeb':codeb,
                                                 'infor':ip_address,
