@@ -25,6 +25,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('market.urls')),
+    path('accounts/', include('accounts.urls')),
     re_path(r'^buy/', include('market.urls')),
 
 ]
