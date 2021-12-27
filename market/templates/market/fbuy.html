@@ -57,12 +57,12 @@ style="vertical-align: top; font-weight: bold; text-align: center;">
 </td>
 </tr>
 
-
+{% for kala in kal %}
 
 <tr>
 <td style="vertical-align: top; text-align: center;">{{kala.jam}}<br>
 </td>
-<td style="vertical-align: top; text-align: center;">{{kala.user}}<br>
+<td style="vertical-align: top; text-align: center;">{{request.user}}<br>
 </td>
 <td style="vertical-align: top; text-align: center;">{{kala.cnt}}<br>
 </td>
@@ -81,7 +81,7 @@ style="vertical-align: top; font-weight: bold; text-align: center;">
 </tr>
 
 
-
+{% endfor %}
 <tr>
 <td style="vertical-align: top; text-align: center;"><span
 style="font-weight: bold; color: rgb(51, 204, 0);">{{jam_final}}</span><br>
@@ -100,7 +100,7 @@ style="font-weight: bold; color: rgb(51, 204, 0);">{{jam_final}}</span><br>
 </td>
 <td style="vertical-align: top; text-align: center;">***<br>
 </td>
-<td style="vertical-align: top; text-align: center;">***<br>
+<td style="vertical-align: top; text-align: center;">جمع کل<br>
 </td>
 </tr>
 </tbody>

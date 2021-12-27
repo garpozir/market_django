@@ -64,7 +64,7 @@ def fbuy(request):
 
     dis=headers3.values('code_mahsool').distinct()
     lp=0
-    jam_final=0;jam_tedad=0;kal={}
+    jam_final=0;jam_tedad=0;kal=[]
     for di in dis:
         _=sefareshat.objects.filter(user_name=str(request.user),code_mahsool=di['code_mahsool'])
         cnt=_.count()
@@ -85,7 +85,7 @@ def fbuy(request):
         kala.jam=str(jam)
         kala.takh=takh
         kala.amount=amo
-        kal[chr(lp)]=kala
+        kal.append(kala)
     jam_final=txt.format(pr=jam_final)
     return render(request,'market/fbuy.html',{'kal':kal,'jam_final':jam_final,
                                               'jam_tedad':jam_tedad})
