@@ -55,12 +55,26 @@ def offer(request):
                                                 'infor2':platform.system(),
                 })
 
-def buyView(request):
-    form =addcomment()
+def comment_fu(request):
+    try:
+        code_2=(re_code)
+    except:
+        return HttpResponse('با موفقیت انجام نشد'+' :( ')
+    if str(request.user)=='AnonymousUser':
+        return HttpResponse('ابتدا باید وارد شوید')
     if request.method=='POST':
         form=addcomment(request.POST)
         if form.is_valid():
-            title=form['name']
+            title=form.cleaned_data['name']
+            email=form.cleaned_data['e_mail']
+            comment2=form.cleaned_data['comment_text']
+            comment=comment.objects.create(code=code_2,name=title,e_mail=email,
+                                          comment_text=comment2,user=request.user)
+            comment.save()
+            return HttpResponse('با موفقیت انجام شد'+' :) ')
+        return HttpResponse('با موفقیت انجام نشد'+' :( ')
+def buyView(request):
+    form =addcomment()
     chk=None
     hostname = socket.gethostname()
     ip_address = socket.gethostbyname(hostname)
@@ -68,6 +82,7 @@ def buyView(request):
         ip_pub = requests.get('http://httpbin.org/ip').json()['origin']
     except:ip_pub='اینترنت ندارید'
     re_code2=list(request.GET.keys())[0]
+    global re_code
     re_code=request.GET[re_code2]
     headers2=comment.objects.filter(code=re_code)
     headers2i=''
