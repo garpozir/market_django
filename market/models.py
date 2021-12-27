@@ -21,7 +21,8 @@ class comment(models.Model):
     name=models.CharField(max_length=100,verbose_name='نام کاربری')
     e_mail= models.EmailField(verbose_name='پست الکترونیکی')
     comment_text=models.TextField(max_length=2000,verbose_name='متن پیام')
-    user=models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,verbose_name='چه کسی این کار را انجام می دهد')
+    user=models.CharField(max_length=50,verbose_name='کاربر',editable=False)
+
     def __str__(self):
         return "{}-{}".format(self.name,self.code)
 

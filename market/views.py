@@ -3,7 +3,7 @@
 # garpozir@gmail.com
 # -*- coding: utf-8 -*-
 
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse,redirect
 from .models import mahsool,comment
 import socket
 import requests
@@ -59,7 +59,7 @@ def comment_fu(request):
     try:
         code_2=(re_code)
     except:
-        return HttpResponse('با موفقیت انجام نشد'+' :( ')
+        return redirect('/')
     if str(request.user)=='AnonymousUser':
         return HttpResponse('ابتدا باید وارد شوید')
     if request.method=='POST':
@@ -68,10 +68,9 @@ def comment_fu(request):
             title=form.cleaned_data['name']
             email=form.cleaned_data['e_mail']
             comment2=form.cleaned_data['comment_text']
-            comment=comment.objects.create(code=code_2,name=title,e_mail=email,
-                                          comment_text=comment2,user=request.user)
-            comment.save()
-            return HttpResponse('با موفقیت انجام شد'+' :) ')
+            comment.objects.create(code=code_2,name=title,e_mail=email,
+                                          comment_text=comment2,user='7')
+            return redirect(f'/buy/?q={code_2}')
         return HttpResponse('با موفقیت انجام نشد'+' :( ')
 def buyView(request):
     form =addcomment()
