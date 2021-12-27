@@ -61,7 +61,34 @@ def fbuy(request):
     headers3=sefareshat.objects.filter(user_name=str(request.user))
     if headers3.count()==0:
         return HttpResponse('سبد شما خالیست')
-    return render(request,'market/fbuy.html')
+
+    dis=headers3.values('code_mahsool').distinct()
+    lp=0
+    jam_final=0;jam_tedad=0;kal={}
+    for di in dis:
+        _=sefareshat.objects.filter(user_name=str(request.user),code_mahsool=di['code_mahsool'])
+        cnt=_.count()
+        jam_tedad+=cnt
+        kala=mahsool.objects.get(code=di['code_mahsool'])
+        lp+=1
+        kala.lp=str(lp)
+        kala.cnt=cnt
+        amo=kala.amount
+        takh=(kala.ofer*amo)//100
+        takh=amo-takh
+        jam=int(takh)*int(cnt)
+        jam_final+=jam
+        txt = '{pr:,}'
+        jam=txt.format(pr=jam)
+        takh=txt.format(pr=takh)
+        amo=txt.format(pr=amo)
+        kala.jam=str(jam)
+        kala.takh=takh
+        kala.amount=amo
+        kal[chr(lp)]=kala
+    jam_final=txt.format(pr=jam_final)
+    return render(request,'market/fbuy.html',{'kal':kal,'jam_final':jam_final,
+                                              'jam_tedad':jam_tedad})
 
 def comment_fu(request):
     try:
