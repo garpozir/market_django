@@ -14,6 +14,12 @@ from django.dispatch.dispatcher import receiver
 def random_string():
     return str(randint(10000, 99999))
 
+class sefareshat(models.Model):
+    user_name=models.CharField(max_length=100,verbose_name='خریدار')
+    code_mahsool=models.IntegerField(verbose_name='کد کالای سفارش داده شده')
+    def __str__(self):
+        return "{}-{}".format(self.user_name,self.code_mahsool)
+
 class comment(models.Model):
 
     userid=models.IntegerField(editable=False,unique=True,blank=True,primary_key=True)

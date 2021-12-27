@@ -4,7 +4,7 @@
 # -*- coding: utf-8 -*-
 
 from django.shortcuts import render, HttpResponse,redirect
-from .models import mahsool,comment
+from .models import mahsool,comment,sefareshat
 import socket
 import requests
 import platform,os
@@ -55,6 +55,14 @@ def offer(request):
                                                 'infor2':platform.system(),
                 })
 
+def fbuy(request):
+    if str(request.user)=='AnonymousUser':
+        return HttpResponse('ابتدا باید وارد شوید')
+    headers3=sefareshat.objects.filter(user_name=str(request.user))
+    if headers3.count()==0:
+        return HttpResponse('سبد شما خالیست')
+    return render(request,'market/fbuy.html')
+
 def comment_fu(request):
     try:
         code_2=(re_code)
@@ -72,6 +80,7 @@ def comment_fu(request):
                                           comment_text=comment2,user='7')
             return redirect(f'/buy/?q={code_2}')
         return HttpResponse('با موفقیت انجام نشد'+' :( ')
+
 def buyView(request):
     form =addcomment()
     chk=None
@@ -118,6 +127,14 @@ def buyView(request):
     except:
         codeb=re_code
 
+    if re_code2=='sbuy':
+        if str(request.user)=='AnonymousUser':
+            return HttpResponse('ابتدا باید وارد شوید')
+        f_head=mahsool.objects.get(code=re_code)
+        if str(f_head.number)=='0':
+            return HttpResponse('فعلا موجودی ندارد بعدا امتحان کنید')
+        sefareshat.objects.create(code_mahsool=re_code,user_name=str(request.user))
+        return redirect(f'/buy/?q={re_code}')
     if re_code2=='like':
         with open(f'./market/static/{re_code}','w') as fd:
             fd.write('1')
