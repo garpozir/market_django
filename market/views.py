@@ -10,6 +10,7 @@ import requests
 import platform,os
 from persiantools.jdatetime import JalaliDate
 from django.db.models import Max
+from .forms import addcomment
 
 def maximum(request):
     headers=mahsool.objects.aggregate(Max('amount'))
@@ -55,6 +56,11 @@ def offer(request):
                 })
 
 def buyView(request):
+    form =addcomment()
+    if request.method=='POST':
+        form=addcomment(request.POST)
+        if form.is_valid():
+            title=form['name']
     chk=None
     hostname = socket.gethostname()
     ip_address = socket.gethostbyname(hostname)
@@ -136,6 +142,7 @@ def buyView(request):
     if chk:
         return render(request,'market/buy.html', {'head':head,
                                                   'headers2':headers2,
+                                                  'form':form,
                                                   'headers2i':headers2i,
                                               'coden':coden,
                                               'codeb':codeb,

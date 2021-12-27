@@ -1453,6 +1453,17 @@ style="color: rgb(14, 14, 72); font-weight: bold;">نظرات</span><br></h2>
 
 {% endfor %}
 
+<p style="text-align: right;"><h3>شما هم پیامی بدهید</h3></p>
+
+ <form method="POST" action="/buy/">
+{% csrf_token %}
+{{form}}
+<button type="submit"  >ثبت</button>
+</form>
+
+
+
+
 
 <table style="text-align: left; width: 100%;" border="0" cellpadding="2"
 cellspacing="2">
