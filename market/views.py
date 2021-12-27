@@ -4,7 +4,7 @@
 # -*- coding: utf-8 -*-
 
 from django.shortcuts import render, HttpResponse
-from .models import mahsool
+from .models import mahsool,comment
 import socket
 import requests
 import platform,os
@@ -63,6 +63,10 @@ def buyView(request):
     except:ip_pub='اینترنت ندارید'
     re_code2=list(request.GET.keys())[0]
     re_code=request.GET[re_code2]
+    headers2=comment.objects.filter(code=re_code)
+    headers2i=''
+    if headers2.count()==0:
+        headers2i='هنوز هیچ پیامی برای این محصول ارسال نشده است'
     try:
         chk=True
         head=mahsool.objects.get(code=re_code)
@@ -131,6 +135,8 @@ def buyView(request):
         sta_like='0';sta_dislike='0'
     if chk:
         return render(request,'market/buy.html', {'head':head,
+                                                  'headers2':headers2,
+                                                  'headers2i':headers2i,
                                               'coden':coden,
                                               'codeb':codeb,
                                                 'infor':ip_address,

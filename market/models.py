@@ -10,8 +10,21 @@ from django.db import models
 from random import randint
 from django.db.models.signals import pre_delete
 from django.dispatch.dispatcher import receiver
+
 def random_string():
     return str(randint(10000, 99999))
+
+class comment(models.Model):
+
+    userid=models.IntegerField(editable=False,unique=True,blank=True,primary_key=True)
+    code=models.CharField(max_length=5,verbose_name='کد محصول')
+    name=models.CharField(max_length=100,verbose_name='نام کاربری')
+    e_mail= models.EmailField(verbose_name='پست الکترونیکی')
+    comment_text=models.TextField(max_length=2000,verbose_name='متن پیام')
+    user=models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.CASCADE,verbose_name='چه کسی این کار را انجام می دهد')
+    def __str__(self):
+        return "{}-{}".format(self.name,self.code)
+
 class mahsool(models.Model):
 
     name=models.CharField(max_length=100,verbose_name='نام محصول را وارد کنید')

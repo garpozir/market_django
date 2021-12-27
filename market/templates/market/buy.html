@@ -1296,7 +1296,7 @@ padding:0;background-size:cover;}
 {% endif %}
 
 
-<div class="title"><h1>فروشگاه اینترنتی لوازم آرایشی</h1></div><h2 class="desc"></h2>
+<div class="title"><h3>فروشگاه اینترنتی لوازم آرایشی</h3></div><h2 class="desc"></h2>
 از میان هزاران نمونه شگفت انگیز و مدرن، محصول خود را همین الان انتخاب کنید.
 </h2>
 <div class="container"> <p class="headerbreadcump"><span><span><a href="http://127.0.0.1:8010/">خانه</a> /تمامی قیمتها به تومان میباشد <span class="breadcrumb_last" aria-current="page"></span></span></span></p></div></div></div></div><button id="side-cat-btn" class="hidden-xs-up btn btn-success">
@@ -1386,6 +1386,17 @@ style="vertical-align: middle; width: 397px; text-align: right;">تاریخ
 ثبت کالا: <span style="color: rgb(51, 51, 255);">{{persian_date}}</span> <span
 style="color: rgb(51, 51, 255);"></span><br>
 </td>
+
+
+
+
+
+
+
+
+
+
+
 <td style="vertical-align: top; text-align: center;"><a
 href="http://127.0.0.1:8010/buy/?next={{coden}}"><img
 style="border: 0px solid ; width: 24px; height: 24px;"
@@ -1399,13 +1410,7 @@ style="border: 0px solid ; width: 24px; height: 24px;"
 alt="تصویر پیدا نشد" title="برو به کالای قبلی"
 src="{% static '/prev.jpg' %}"></a></div>
 </td>
-<td style="vertical-align: top;">
-<div style="text-align: center;"><a
-href="http://127.0.0.1:8010/buy/?comment={{head.code}}"><img
-style="border: 0px solid ; width: 24px; height: 24px;"
-alt="تصویر پیدا نشد" title="نظردهی"
-src="{% static '/comment.jpg' %}"></a></div>
-</td>
+
 <td style="vertical-align: top;">
 <div style="text-align: center;"><a
 href="http://127.0.0.1:8010/buy/?sbuy={{head.code}}"><img
@@ -1433,9 +1438,20 @@ src="{% static '/like.jpg' %}"></a><br><div style="text-align: center;"><h4><spa
 
 
 
+<hr><h2 style="text-align: right;"><span style="color: rgb(51, 51, 255);"><span
+style="color: rgb(14, 14, 72); font-weight: bold;">نظرات</span><br></h2>
+<p style="text-align: right;">{{headers2i}}
+{% for headi in headers2 %}</p>
+</span>
+<p style="text-align: right;"><span style="color: rgb(51, 51, 255);">{{headi.name}}</span>
+میگوید:</p>
+<div style="text-align: right;"><span style="color: rgb(102, 0, 0);">
+<li>{{headi.comment_text}}</li>
+</span><br>
+</div>
 
 
-
+{% endfor %}
 
 
 <table style="text-align: left; width: 100%;" border="0" cellpadding="2"
