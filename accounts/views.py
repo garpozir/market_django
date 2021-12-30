@@ -26,6 +26,7 @@ def SignupView(request):
             return redirect('/')
         return HttpResponse('با موفقیت انجام نشد'+' :( ')
     form = UserCreationForm()
+
     return render(request,'accounts/signup.html',{'form':form,
                                                 'infor':ip_address,
                                                 'ip_pub':ip_pub,

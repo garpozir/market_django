@@ -1316,13 +1316,24 @@ padding:0;background-size:cover;}
   <!-- ngRepeat: page in pages track by $index --><li ng-repeat="page in pages track by $index" ng-class="{active: page.active,disabled: ngDisabled&amp;&amp;!page.active}" class="pagination-page ng-scope active"><a href="" ng-click="selectPage(page.number, $event)" class="ng-binding">1</a></li><!-- end ngRepeat: page in pages track by $index --><li ng-repeat="page in pages track by $index" ng-class="{active: page.active,disabled: ngDisabled&amp;&amp;!page.active}" class="pagination-page ng-scope"><a href="" ng-click="selectPage(page.number, $event)" class="ng-binding">2</a></li><!-- end ngRepeat: page in pages track by $index --><li ng-repeat="page in pages track by $index" ng-class="{active: page.active,disabled: ngDisabled&amp;&amp;!page.active}" class="pagination-page ng-scope"><a href="" ng-click="selectPage(page.number, $event)" class="ng-binding">3</a></li><!-- end ngRepeat: page in pages track by $index --><li ng-repeat="page in pages track by $index" ng-class="{active: page.active,disabled: ngDisabled&amp;&amp;!page.active}" class="pagination-page ng-scope"><a href="" ng-click="selectPage(page.number, $event)" class="ng-binding">4</a></li><!-- end ngRepeat: page in pages track by $index --><li ng-repeat="page in pages track by $index" ng-class="{active: page.active,disabled: ngDisabled&amp;&amp;!page.active}" class="pagination-page ng-scope"><a href="" ng-click="selectPage(page.number, $event)" class="ng-binding">5</a></li><!-- end ngRepeat: page in pages track by $index --><li ng-repeat="page in pages track by $index" ng-class="{active: page.active,disabled: ngDisabled&amp;&amp;!page.active}" class="pagination-page ng-scope"><a href="" ng-click="selectPage(page.number, $event)" class="ng-binding">6</a></li><!-- end ngRepeat: page in pages track by $index --><li ng-repeat="page in pages track by $index" ng-class="{active: page.active,disabled: ngDisabled&amp;&amp;!page.active}" class="pagination-page ng-scope"><a href="" ng-click="selectPage(page.number, $event)" class="ng-binding">7</a></li><!-- end ngRepeat: page in pages track by $index --><li ng-repeat="page in pages track by $index" ng-class="{active: page.active,disabled: ngDisabled&amp;&amp;!page.active}" class="pagination-page ng-scope"><a href="" ng-click="selectPage(page.number, $event)" class="ng-binding">8</a></li><!-- end ngRepeat: page in pages track by $index --><li ng-repeat="page in pages track by $index" ng-class="{active: page.active,disabled: ngDisabled&amp;&amp;!page.active}" class="pagination-page ng-scope"><a href="" ng-click="selectPage(page.number, $event)" class="ng-binding">9</a></li><!-- end ngRepeat: page in pages track by $index -->
   <!-- ngIf: ::directionLinks --><li ng-if="::directionLinks" ng-class="{disabled: noNext()||ngDisabled}" class="pagination-next ng-scope"><a href="" ng-click="selectPage(page + 1, $event)" class="ng-binding">›</a></li><!-- end ngIf: ::directionLinks -->
   <!-- ngIf: ::boundaryLinks -->
+  
+ <style>
+
+.helptext{
+  visibility: hidden;
+}
+
+</style>
+  
+  
+  
  <h1>فرم زیر را پر کنید</h1>
 
     <form action="" method="POST">
    
-    <h6>{{form}}</h6>
+    <div style="margin-left: 40px; text-align: left;"><h6>{{form}}</h6></div>
     {% csrf_token %}
-    <button Type="submit">ثبت نام</button>
+    <div style="margin-left: 40px; text-align: left;"><button Type="submit">ثبت نام</button></div>
 <table style="text-align: left; width: 100%;" border="0" cellpadding="2"
 cellspacing="2">
 <tbody>
