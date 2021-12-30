@@ -35,6 +35,26 @@ def maximum(request):
                                                 'infor2':platform.system(),
                 })
 
+def Upper(request):
+    headers=mahsool.objects.filter(ofer__gt=0)
+    for head in headers:
+        amo=head.amount
+        txt = '{pr:,}'
+        amo=txt.format(pr=amo)
+        head.amount=amo
+    hostname = socket.gethostname()
+    ip_address = socket.gethostbyname(hostname)
+    try:
+        ip_pub = requests.get('http://httpbin.org/ip').json()['origin']
+    except:ip_pub='اینترنت ندارید'
+    return render(request,'market/offer.html',{'headers':headers,
+
+
+                                                'infor':ip_address,
+                                                'ip_pub':ip_pub,
+                                                'infor2':platform.system(),
+                })
+
 def offer(request):
     headers=mahsool.objects.filter(ofer__gt=0)
     for head in headers:
