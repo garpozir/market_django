@@ -4,9 +4,18 @@
 # -*- coding: utf-8 -*-
 
 from django.shortcuts import render,redirect
+import socket
+import requests
+import platform
 from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
 from django.http import HttpResponse
 from django.contrib.auth import login,logout
+
+hostname = socket.gethostname()
+ip_address = socket.gethostbyname(hostname)
+try:
+    ip_pub = requests.get('http://httpbin.org/ip').json()['origin']
+except:ip_pub='اینترنت ندارید'
 
 def SignupView(request):
     if request.method=='POST':
@@ -17,7 +26,11 @@ def SignupView(request):
             return redirect('/')
         return HttpResponse('با موفقیت انجام نشد'+' :( ')
     form = UserCreationForm()
-    return render(request,'accounts/signup.html',{'form':form})
+    return render(request,'accounts/signup.html',{'form':form,
+                                                'infor':ip_address,
+                                                'ip_pub':ip_pub,
+                                                'infor2':platform.system(),
+                                                 })
 
 def LoginView(request):
     if request.method=='POST':
@@ -28,7 +41,11 @@ def LoginView(request):
             return redirect('/')
         return HttpResponse('با موفقیت انجام نشد'+' :( ')
     form = AuthenticationForm()
-    return render(request,'accounts/login.html',{'form':form})
+    return render(request,'accounts/login.html',{'form':form,
+                                                'infor':ip_address,
+                                                'ip_pub':ip_pub,
+                                                'infor2':platform.system(),
+                                                })
 
 def LogoutView(request):
     if request.method=='POST':
