@@ -5,11 +5,12 @@
 
 from django.shortcuts import render, HttpResponse,redirect
 from .models import mahsool,comment,sefareshat
-import socket
+import socket,sqlite3
 import requests
 import platform,os
+from market_django.settings import BASE_DIR
 from persiantools.jdatetime import JalaliDate
-from django.db.models import Max
+from django.db.models import Max,Q
 from .forms import addcomment
 
 def maximum(request):
@@ -36,7 +37,12 @@ def maximum(request):
                 })
 
 def Upper(request):
-    headers=mahsool.objects.filter(ofer__gt=0)
+    conn = sqlite3.connect(f"{BASE_DIR}/db.sqlite3")
+    cur = conn.cursor()
+    cur.execute("select code_mahsool from market_sefareshat GROUP by code_mahsool having count(code_mahsool) > 1 ORDER by count(code_mahsool) desc limit 5;")
+    rows = cur.fetchall()
+    conn.close()
+    headers=mahsool.objects.filter(Q(code=rows[0][0]) | Q(code=rows[1][0]))
     for head in headers:
         amo=head.amount
         txt = '{pr:,}'
